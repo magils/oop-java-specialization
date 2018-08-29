@@ -38,8 +38,54 @@ public class Tester
 
     }
 
+    public void testUniqueIpsOnDate() {
+
+        LogAnalyzer logAnalyzer = new LogAnalyzer();
+        String filePath = getClass().getClassLoader().getResource("weblog1_log").getFile();
+        logAnalyzer.readFile(filePath);
+        List<LogEntry> result =logAnalyzer.uniqueIPVisitsOnDay("Mar 17");
+
+        System.out.println(result.size());
+
+        for(LogEntry entry : result){
+            System.out.println(entry.getAccessTime());
+        }
+
+    }
+
+
+
+    public void testCountReponseCodeOnRange() {
+
+        LogAnalyzer logAnalyzer = new LogAnalyzer();
+        String filePath = getClass().getClassLoader().getResource("weblog1_log").getFile();
+        logAnalyzer.readFile(filePath);
+        List<LogEntry> logs = logAnalyzer.countUniqueIPsInRange(300,399);
+
+        System.out.println(logs.size());
+
+        for(LogEntry logEntry : logs){
+            System.out.println(logEntry.getStatusCode());
+        }
+
+    }
+
+    public void testHighest() {
+
+        LogAnalyzer logAnalyzer = new LogAnalyzer();
+        String filePath = getClass().getClassLoader().getResource("weblog1_log").getFile();
+        logAnalyzer.readFile(filePath);
+        logAnalyzer.printAllHigherThanNum(400);
+
+    }
+
     public static void main(String []  args){
+
+
         Tester tester = new Tester();
-        tester.testCountUniqueIPs();
+
+        tester.testUniqueIpsOnDate();
+        tester.testCountReponseCodeOnRange();
+
     }
 }

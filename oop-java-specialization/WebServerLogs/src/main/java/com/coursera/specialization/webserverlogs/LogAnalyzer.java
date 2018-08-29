@@ -62,10 +62,38 @@ public class LogAnalyzer {
         }
     }
 
-    public List<ArrayList<LogEntry>> uniqueIPVisitsOnDay(String someday){
+    public List<LogEntry> uniqueIPVisitsOnDay(String someday) {
 
-        return null;
+        List<LogEntry> entriesOnDate = new ArrayList<>();
+
+        for (LogEntry logEntry : records) {
+
+            String logDate = logEntry.getAccessTime().toString();
+
+            if (logDate.contains(someday)) {
+                entriesOnDate.add(logEntry);
+            }
+
+        }
+
+        return entriesOnDate;
     }
 
+    public List<LogEntry> countUniqueIPsInRange(int low, int high) {
+
+        List<LogEntry> logEntriesOnRange = new ArrayList<>();
+
+        for (LogEntry logEntry : records) {
+
+            if (logEntry.getStatusCode() >= low && logEntry.getStatusCode() <= high) {
+
+                logEntriesOnRange.add(logEntry);
+
+            }
+
+        }
+
+        return logEntriesOnRange;
+    }
 
 }
